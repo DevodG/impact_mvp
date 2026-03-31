@@ -132,7 +132,7 @@ function App() {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-screen bg-animated bg-grid bg-noise overflow-hidden touch-pan-y"
+      className="relative w-full h-screen md:h-screen md:overflow-hidden bg-animated bg-grid bg-noise touch-pan-y"
     >
       {/* Background Elements - Responsive sizing */}
       <div className="absolute inset-0 pointer-events-none">
@@ -196,7 +196,7 @@ function App() {
       </motion.header>
 
       {/* Main Content - With Touch Support */}
-      <main className="relative z-10 w-full h-full flex items-center justify-center px-4 md:px-8 py-20 md:py-24">
+      <main className="relative z-10 w-full h-auto md:h-full flex items-center justify-center px-4 md:px-8 pt-20 pb-24 md:py-24">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={currentSlide}
@@ -212,7 +212,7 @@ function App() {
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.2}
             onDragEnd={handleDragEnd}
-            className="w-full max-w-7xl h-full cursor-grab active:cursor-grabbing"
+            className="w-full max-w-7xl md:h-full cursor-grab active:cursor-grabbing overflow-y-auto md:overflow-y-visible scrollbar-hide"
           >
             <CurrentSlideComponent />
           </motion.div>

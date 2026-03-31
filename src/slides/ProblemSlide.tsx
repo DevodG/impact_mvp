@@ -38,7 +38,7 @@ const floatingPopups = [
 
 export default function ProblemSlide() {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center relative px-4">
+    <div className="w-full min-h-full flex flex-col items-center justify-center relative px-4">
       {/* Floating Popups */}
       {floatingPopups.map((popup, i) => (
         <motion.div

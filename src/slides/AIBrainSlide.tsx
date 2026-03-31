@@ -41,7 +41,7 @@ const aiModules = [
 
 export default function AIBrainSlide() {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center relative px-4">
+    <div className="w-full min-h-full flex flex-col items-center justify-center relative px-4">
       {/* Main Content */}
       <div className="relative z-10 max-w-5xl mx-auto w-full">
         {/* Header */}

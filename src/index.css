@@ -41,6 +41,13 @@
     font-family: 'Inter', system-ui, sans-serif;
     overflow: hidden;
   }
+
+  /* Allow vertical scroll on mobile when content overflows */
+  @media (max-width: 768px) {
+    body {
+      overflow-y: auto;
+    }
+  }
 }
 
 @layer utilities {

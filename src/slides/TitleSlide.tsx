@@ -3,7 +3,7 @@ import { Shield, Brain, TrendingUp, ArrowRight } from 'lucide-react';
 
 export default function TitleSlide() {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center relative">
+    <div className="w-full min-h-full flex flex-col items-center justify-center relative">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
