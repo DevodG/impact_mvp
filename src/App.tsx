@@ -156,7 +156,7 @@ function App() {
 
       {/* Header - Responsive */}
       <motion.header 
-        className="absolute top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 md:py-6"
+        className="fixed md:absolute top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 md:py-6"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
@@ -221,7 +221,7 @@ function App() {
 
       {/* Navigation Controls - Responsive */}
       <motion.div 
-        className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 md:gap-6"
+        className="fixed md:absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 md:gap-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
@@ -282,7 +282,7 @@ function App() {
 
       {/* Mobile Swipe Hint */}
       <motion.div 
-        className="absolute bottom-6 right-4 z-50 md:hidden"
+        className="fixed bottom-6 right-4 z-50 md:hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
@@ -293,7 +293,7 @@ function App() {
       </motion.div>
 
       {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/5">
+      <div className="fixed md:absolute bottom-0 left-0 right-0 h-1 bg-white/5 z-50">
         <motion.div 
           className="h-full bg-gradient-to-r from-cyan-400 to-blue-400"
           initial={{ width: '0%' }}

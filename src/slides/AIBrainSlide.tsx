@@ -63,85 +63,122 @@ export default function AIBrainSlide() {
         </motion.div>
 
         {/* AI Pipeline Visualization */}
-        <div className="relative h-80 md:h-96 flex items-center justify-center">
-          {/* Central Brain */}
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.3, type: 'spring' }}
-            className="relative z-20"
-          >
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 border-2 border-purple-500/50 flex items-center justify-center glow-blue">
-              <Brain className="w-12 h-12 md:w-16 md:h-16 text-purple-400" />
-            </div>
-            
-            {/* Rotating Ring */}
+        <div className="relative flex items-center justify-center mb-6">
+          {/* Desktop: radial layout */}
+          <div className="hidden md:block relative h-96 w-full">
+            {/* Central Brain */}
             <motion.div
-              className="absolute inset-0 rounded-full border border-dashed border-purple-400/30"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              style={{ width: '140px', height: '140px', margin: '-10px', top: 0, left: 0 }}
-            />
-            
-            {/* Pulse Effect */}
-            <motion.div
-              className="absolute inset-0 rounded-full bg-purple-500/20"
-              animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </motion.div>
-
-          {/* Connected Modules */}
-          {aiModules.map((module, index) => {
-            const positions: Record<string, { top: string; left: string }> = {
-              'top': { top: '0%', left: '50%' },
-              'left': { top: '35%', left: '8%' },
-              'right': { top: '35%', left: '92%' },
-              'bottom-left': { top: '80%', left: '20%' },
-              'bottom-right': { top: '80%', left: '80%' },
-            };
-            const pos = positions[module.position];
-            
-            return (
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.3, type: 'spring' }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+            >
+              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 border-2 border-purple-500/50 flex items-center justify-center glow-blue">
+                <Brain className="w-16 h-16 text-purple-400" />
+              </div>
               <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 + index * 0.15 }}
-                className="absolute hidden md:block"
-                style={{ top: pos.top, left: pos.left, transform: 'translate(-50%, -50%)' }}
-              >
-                {/* Module Card */}
+                className="absolute rounded-full border border-dashed border-purple-400/30"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                style={{ width: '150px', height: '150px', top: '-9px', left: '-9px' }}
+              />
+              <motion.div
+                className="absolute inset-0 rounded-full bg-purple-500/20"
+                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </motion.div>
+
+            {/* Connected Modules */}
+            {aiModules.map((module, index) => {
+              const positions: Record<string, { top: string; left: string }> = {
+                'top': { top: '0%', left: '50%' },
+                'left': { top: '35%', left: '8%' },
+                'right': { top: '35%', left: '92%' },
+                'bottom-left': { top: '80%', left: '20%' },
+                'bottom-right': { top: '80%', left: '80%' },
+              };
+              const pos = positions[module.position];
+              return (
                 <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className={`glass p-4 rounded-xl border border-${module.color}-500/30 min-w-[140px] text-center`}
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + index * 0.15 }}
+                  className="absolute"
+                  style={{ top: pos.top, left: pos.left, transform: 'translate(-50%, -50%)' }}
                 >
-                  <div className={`w-10 h-10 mx-auto mb-2 rounded-lg bg-${module.color}-500/20 flex items-center justify-center`}>
-                    <module.icon className={`w-5 h-5 text-${module.color}-400`} />
-                  </div>
-                  <h4 className="text-white font-medium text-sm">{module.title}</h4>
-                  <p className="text-white/50 text-xs">{module.description}</p>
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    className={`glass p-4 rounded-xl border border-${module.color}-500/30 w-36 text-center`}
+                  >
+                    <div className={`w-10 h-10 mx-auto mb-2 rounded-lg bg-${module.color}-500/20 flex items-center justify-center`}>
+                      <module.icon className={`w-5 h-5 text-${module.color}-400`} />
+                    </div>
+                    <h4 className="text-white font-medium text-sm">{module.title}</h4>
+                    <p className="text-white/50 text-xs">{module.description}</p>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
 
-          {/* Mobile Modules Grid */}
-          <div className="md:hidden absolute inset-0 grid grid-cols-2 gap-2 pt-40">
-            {aiModules.slice(0, 4).map((module, index) => (
+          {/* Mobile: central brain + grid below */}
+          <div className="md:hidden w-full flex flex-col items-center gap-4">
+            {/* Central Brain */}
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.3, type: 'spring' }}
+              className="relative"
+            >
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 border-2 border-purple-500/50 flex items-center justify-center glow-blue">
+                <Brain className="w-10 h-10 text-purple-400" />
+              </div>
               <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 + index * 0.1 }}
-                className={`glass p-2 rounded-lg border border-${module.color}-500/30 text-center`}
+                className="absolute inset-0 rounded-full bg-purple-500/20"
+                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </motion.div>
+
+            {/* All 5 modules in even 2+2+1 grid */}
+            <div className="w-full grid grid-cols-2 gap-3">
+              {aiModules.slice(0, 4).map((module, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                  className={`glass p-3 rounded-xl border border-${module.color}-500/30 flex items-center gap-3`}
+                >
+                  <div className={`w-9 h-9 rounded-lg bg-${module.color}-500/20 flex items-center justify-center flex-shrink-0`}>
+                    <module.icon className={`w-4 h-4 text-${module.color}-400`} />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium text-xs">{module.title}</h4>
+                    <p className="text-white/50 text-xs leading-tight">{module.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            {/* 5th module centered */}
+            <div className="w-full flex justify-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 }}
+                className={`glass p-3 rounded-xl border border-${aiModules[4].color}-500/30 flex items-center gap-3 w-1/2`}
               >
-                <div className={`w-8 h-8 mx-auto mb-1 rounded-lg bg-${module.color}-500/20 flex items-center justify-center`}>
-                  <module.icon className={`w-4 h-4 text-${module.color}-400`} />
+                <div className={`w-9 h-9 rounded-lg bg-${aiModules[4].color}-500/20 flex items-center justify-center flex-shrink-0`}>
+                  <aiModules[4].icon className={`w-4 h-4 text-${aiModules[4].color}-400`} />
                 </div>
-                <h4 className="text-white font-medium text-xs">{module.title}</h4>
+                <div>
+                  <h4 className="text-white font-medium text-xs">{aiModules[4].title}</h4>
+                  <p className="text-white/50 text-xs leading-tight">{aiModules[4].description}</p>
+                </div>
               </motion.div>
-            ))}
+            </div>
           </div>
         </div>
 
