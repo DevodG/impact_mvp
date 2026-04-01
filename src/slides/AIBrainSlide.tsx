@@ -163,22 +163,28 @@ export default function AIBrainSlide() {
               ))}
             </div>
             {/* 5th module centered */}
-            <div className="w-full flex justify-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-                className={`glass p-3 rounded-xl border border-${aiModules[4].color}-500/30 flex items-center gap-3 w-1/2`}
-              >
-                <div className={`w-9 h-9 rounded-lg bg-${aiModules[4].color}-500/20 flex items-center justify-center flex-shrink-0`}>
-                  <aiModules[4].icon className={`w-4 h-4 text-${aiModules[4].color}-400`} />
+            {(() => {
+              const last = aiModules[4];
+              const LastIcon = last.icon;
+              return (
+                <div className="w-full flex justify-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.9 }}
+                    className={`glass p-3 rounded-xl border border-${last.color}-500/30 flex items-center gap-3 w-1/2`}
+                  >
+                    <div className={`w-9 h-9 rounded-lg bg-${last.color}-500/20 flex items-center justify-center flex-shrink-0`}>
+                      <LastIcon className={`w-4 h-4 text-${last.color}-400`} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium text-xs">{last.title}</h4>
+                      <p className="text-white/50 text-xs leading-tight">{last.description}</p>
+                    </div>
+                  </motion.div>
                 </div>
-                <div>
-                  <h4 className="text-white font-medium text-xs">{aiModules[4].title}</h4>
-                  <p className="text-white/50 text-xs leading-tight">{aiModules[4].description}</p>
-                </div>
-              </motion.div>
-            </div>
+              );
+            })()}
           </div>
         </div>
 

@@ -56,7 +56,7 @@ export default function HowItWorksSlide() {
         </motion.div>
 
         {/* Pipeline Flow */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:flex md:flex-row items-stretch md:items-center justify-center gap-4 md:gap-6">
           {steps.map((step, index) => (
             <div key={index} className="flex items-center gap-4">
               {/* Step Card */}
@@ -64,11 +64,11 @@ export default function HowItWorksSlide() {
                 initial={{ opacity: 0, y: 30, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ delay: step.delay, duration: 0.5 }}
-                className="relative"
+                className="relative w-full"
               >
                 <motion.div
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className={`glass p-5 md:p-6 rounded-2xl border border-${step.color}-500/30 w-full md:w-48 text-center relative overflow-hidden`}
+                  className={`glass p-5 md:p-6 rounded-2xl border border-${step.color}-500/30 w-full md:w-48 min-h-[160px] text-center relative overflow-hidden flex flex-col items-center justify-center`}
                 >
                   {/* Glow Background */}
                   <div className={`absolute inset-0 bg-${step.color}-500/5`} />
